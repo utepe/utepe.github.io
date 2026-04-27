@@ -1,5 +1,5 @@
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Home from "./routes/Home/Home";
 import Resume from "./routes/Resume/Resume";
@@ -8,18 +8,21 @@ import Contact from "./routes/Contact/Contact";
 import Project from "./routes/Project/Project";
 
 function App() {
+  const location = useLocation();
+
   return (
-    <Routes>
-      {/* TODO: fix links so its not /#/XXX prolly has something to do with HashRouter */}
-      <Route path="/" element={<NavigationBar />}>
-        <Route index element={<Home />} />
-        <Route path="/resume" element={<Resume />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:titleId" element={<Project />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<h1>404</h1>} />
-      </Route>
-    </Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<NavigationBar />}>
+          <Route index element={<Home />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:titleId" element={<Project />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<h1>404</h1>} />
+        </Route>
+      </Routes>
+    </AnimatePresence>
   );
 }
 
