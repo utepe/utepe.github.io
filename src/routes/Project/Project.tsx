@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import projectData from "../../constants/projects.json";
@@ -17,22 +17,20 @@ export interface Project {
   keyPoints?: string[];
 }
 
-const Project = () => {
+// TODO: Replace the modal in ActionAreaCard with navigation to this route.
+// Each project should have its own dedicated page at /projects/:titleId with
+// a full layout (hero image, overview, key points, YouTube embed, poster PDF, GitHub link).
+const ProjectPage = () => {
   const params = useParams();
 
   const [project, setProject] = useState<Project>();
 
   useEffect(() => {
-    // const fetchProjects = async () => {
-    //     const projectData = await getJsonData<Project[]>("../../constants/projects.json");
-    //     setProject(projectData);
-    // };
-    // fetchProjects();
     const data = projectData.find(
       (project) => project.titleId === params.titleId
     );
     setProject(data);
-  }, []);
+  }, [params.titleId]);
 
   return project ? (
     <div>
@@ -50,4 +48,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default ProjectPage;

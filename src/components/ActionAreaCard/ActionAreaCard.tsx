@@ -6,6 +6,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Box from "@mui/material/Box";
 import { Button, CardActionArea } from "@mui/material";
 import { Project } from "../../routes/Project/Project";
 import { Fragment, useState } from "react";
@@ -15,6 +16,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { Transition } from "../AlertDialog/AlertDialog";
 import TwoItemGridCard from "../TwoItemGridCard/TwoItemGridCard";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import { motion } from "framer-motion";
 
 type ActionAreaCardProps = {
   project: Project;
@@ -35,38 +37,70 @@ const ActionAreaCard = ({ project }: ActionAreaCardProps) => {
     if (youtubeEmbedId) {
       const iframe = document.querySelector("iframe");
       if (iframe) {
-        iframe.src = iframe.src;
+        // eslint-disable-next-line no-self-assign
+        iframe.src = iframe.src; // forces YouTube to stop playing on dialog close
       }
     }
   };
 
   return (
     <Fragment>
-      <Card sx={{ maxWidth: 600 }}>
-        <CardActionArea onClick={handleClickOpen}>
-          <CardMedia
-            component="img"
-            height="300"
-            image={require(`../../assets/projectImages/${image}`)}
-            alt={`${title} image`}
+      <motion.div
+        whileHover={{ y: -4 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      >
+        <Card
+          sx={{
+            maxWidth: 600,
+            position: "relative",
+            "&:hover .hover-overlay": { opacity: 1 },
+          }}
+        >
+          <Box
+            className="hover-overlay"
             sx={{
-              width: "100%",
-              height: "auto"
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: "rgba(0, 4, 53, 0.55)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              opacity: 0,
+              transition: "opacity 0.25s ease",
+              zIndex: 1,
+              pointerEvents: "none",
+              borderRadius: "inherit",
             }}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {title}
+          >
+            <Typography variant="subtitle1" color="white" fontWeight={600}>
+              View Details
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {overview}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <li>Click to learn more</li>
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+          </Box>
+          <CardActionArea onClick={handleClickOpen}>
+            <CardMedia
+              component="img"
+              image={require(`../../assets/projectImages/${image}`)}
+              alt={`${title} image`}
+              sx={{
+                width: "100%",
+                height: "auto",
+              }}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {overview}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </motion.div>
+
       <Dialog
         fullWidth
         maxWidth="md"
@@ -87,7 +121,8 @@ const ActionAreaCard = ({ project }: ActionAreaCardProps) => {
                 id="dialog-slide-description"
                 variant="subtitle1"
               >
-                <br /><b>Key Points from the Project</b>
+                <br />
+                <b>Key Points from the Project</b>
               </DialogContentText>
               <UnorderedList
                 elements={keyPoints}
@@ -110,19 +145,20 @@ const ActionAreaCard = ({ project }: ActionAreaCardProps) => {
                 View Github Repository
               </Button>
             }
-            rightItem={ poster ?
-              <Button
-                variant="outlined"
-                color="primary"
-                startIcon={<PictureAsPdfIcon />}
-                href={require(`../../assets/pdfs/${poster}`)}
-                target="_blank"
-              >
-                View Poster
-              </Button> : null
+            rightItem={
+              poster ? (
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<PictureAsPdfIcon />}
+                  href={require(`../../assets/pdfs/${poster}`)}
+                  target="_blank"
+                >
+                  View Poster
+                </Button>
+              ) : null
             }
           />
-
           {youtubeEmbedId && <YoutubeEmbed embedId={youtubeEmbedId} />}
         </DialogContent>
       </Dialog>
