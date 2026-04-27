@@ -8,17 +8,25 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { useState, MouseEvent, Fragment } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import Footer from "../Footer/Footer";
 
 const pages = ["Home", "Resume", "Projects", "Contact"];
 
 const NavigationBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [currentPage, setCurrentPage] = useState<string>("");
+
+  const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 20 });
+
+  const isActive = (page: string) => {
+    if (page === "Home") return location.pathname === "/";
+    return location.pathname === `/${page.toLowerCase()}`;
+  };
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -26,10 +34,9 @@ const NavigationBar = () => {
 
   const handlePageChange = (page: string | null) => {
     if (!page) return;
-
-    setCurrentPage(page);
+    setAnchorElNav(null);
     if (page === "Home") return navigate("/");
-    navigate(`/${page?.toLocaleLowerCase()}`);
+    navigate(`/${page.toLocaleLowerCase()}`);
   };
 
   const handleCloseNavMenu = () => {
@@ -39,11 +46,18 @@ const NavigationBar = () => {
   return (
     <Fragment>
       <AppBar
-        position="static"
-        sx={{ backgroundColor: "#000435" }}
-        elevation={0}
+        position="sticky"
+        elevation={trigger ? 4 : 0}
+        sx={{
+          backgroundColor: trigger
+            ? "rgba(0, 4, 53, 0.85)"
+            : "#000435",
+          backdropFilter: trigger ? "blur(12px)" : "none",
+          transition:
+            "background-color 0.3s, backdrop-filter 0.3s, box-shadow 0.3s",
+        }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth={false} sx={{ px: { xs: 2, md: 4, xl: 8 } }}>
           <Toolbar disableGutters>
             <Typography
               variant="h6"
@@ -102,6 +116,7 @@ const NavigationBar = () => {
                 ))}
               </Menu>
             </Box>
+
             <Typography
               variant="h5"
               noWrap
@@ -119,30 +134,43 @@ const NavigationBar = () => {
             >
               Uygur Tepe
             </Typography>
+
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
-                  disabled={page === currentPage}
                   key={page}
                   onClick={(e) => handlePageChange(e.currentTarget.textContent)}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                    position: "relative",
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: 6,
+                      left: "50%",
+                      transform: isActive(page)
+                        ? "translateX(-50%) scaleX(1)"
+                        : "translateX(-50%) scaleX(0)",
+                      transformOrigin: "center",
+                      width: "60%",
+                      height: "2px",
+                      backgroundColor: "white",
+                      transition: "transform 0.25s ease",
+                    },
+                  }}
                 >
-                  {page === currentPage ? (
-                    <span style={{ color: "grey", borderBottom: "2px solid white" }}>
-                      {page}
-                    </span>
-                  ) : (
-                    <>{ page }</>
-                  )}
+                  {page}
                 </Button>
               ))}
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
-      <div style={{ paddingLeft: "1%", paddingRight: "1%" }}>
+      <Box sx={{ px: { xs: 2, md: 4, xl: 8 }, minHeight: "calc(100vh - 64px - 80px)" }}>
         <Outlet />
-      </div> 
+      </Box>
       <Footer title={"Uygur Tepe Portfolio"} />
     </Fragment>
   );

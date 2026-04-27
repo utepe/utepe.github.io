@@ -1,58 +1,140 @@
 import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
-
 import profilePic from "../../assets/images/profilePic.jpg";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import EmailIcon from "@mui/icons-material/Email";
+import { motion } from "framer-motion";
+import PageTransition from "../../components/PageTransition/PageTransition";
 
 const Home = () => {
   return (
-    <Fragment>
-      <Grid
-        container
-        justifyContent="space-between"
-        alignItems="center"
-        rowSpacing={1}
-        columns={{ xs: 4, sm: 4, md: 8 }}
-        sx={{ flexGrow: 1, paddingBottom: "10px", paddingTop: "10px" }}
+    <PageTransition>
+      <Box
+        sx={{
+          minHeight: "90vh",
+          display: "flex",
+          alignItems: "center",
+          background:
+            "linear-gradient(135deg, #000435 0%, #1a237e 60%, #283593 100%)",
+          color: "white",
+          px: { xs: 3, md: 8, xl: 12 },
+          mx: { xs: -2, md: -4, xl: -8 },
+        }}
       >
-        <Grid item xs={4}>
-          <Avatar
-            alt="Uygur Tepe"
-            src={profilePic}
-            sx={{ width: 384, height: 384 }}
-          />
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          rowSpacing={4}
+          columnSpacing={6}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+          sx={{ width: "100%", py: 6 }}
+        >
+          <Grid item xs={4} sm={3} md={3} sx={{ display: "flex", justifyContent: "center" }}>
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <Avatar
+                alt="Uygur Tepe"
+                src={profilePic}
+                sx={{
+                  width: { xs: 200, md: 280, xl: 360 },
+                  height: { xs: 200, md: 280, xl: 360 },
+                  border: "4px solid rgba(255,255,255,0.3)",
+                  boxShadow: 8,
+                }}
+              />
+            </motion.div>
+          </Grid>
+
+          <Grid item xs={4} sm={5} md={7}>
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            >
+              <Typography variant="h3" sx={{ color: "white", mb: 0.5 }}>
+                Uygur Tepe
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                sx={{ color: "rgba(255,255,255,0.7)", mb: 2, fontWeight: 500 }}
+              >
+                Electrical &amp; Computer Engineer
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ color: "rgba(255,255,255,0.85)", textAlign: "left", mb: 3 }}
+              >
+                I'm an engineer who loves to learn and build things. I'm
+                currently heavily interested in embedded systems, software
+                development and bridging the gap between hardware and software.
+                I have worked with a variety of tools and technologies and am
+                always looking to learn more. My ultimate goal is to further
+                improve the link between humans and computer systems to aid in
+                the development of new technologies. To pursue this goal, I have
+                worked in soft robotics, embedded systems and have aided in
+                developing non-conventional Hardware-in-the-Loop environments
+                for thermal systems. I have received my B.A.Sc in Electrical and
+                Computer Engineering with a Minor in Computer Science and
+                Mathematics from the University of Windsor.
+              </Typography>
+
+              <Fragment>
+                <Button
+                  variant="text"
+                  size="large"
+                  startIcon={<LocationOnIcon />}
+                  href="https://maps.app.goo.gl/ejH4KheBRx56T2aC9"
+                  target="_blank"
+                  sx={{ color: "rgba(255,255,255,0.7)", mr: 1 }}
+                >
+                  Detroit, MI
+                </Button>
+              </Fragment>
+
+              <Box sx={{ mt: 1 }}>
+                <IconButton
+                  aria-label="LinkedIn"
+                  size="large"
+                  href="https://www.linkedin.com/in/uygur-tepe/"
+                  target="_blank"
+                  sx={{ color: "rgba(255,255,255,0.8)", "&:hover": { color: "white" } }}
+                >
+                  <LinkedInIcon fontSize="inherit" />
+                </IconButton>
+                <IconButton
+                  aria-label="GitHub"
+                  size="large"
+                  href="https://github.com/utepe"
+                  target="_blank"
+                  sx={{ color: "rgba(255,255,255,0.8)", "&:hover": { color: "white" } }}
+                >
+                  <GitHubIcon fontSize="inherit" />
+                </IconButton>
+                <IconButton
+                  aria-label="Email"
+                  size="large"
+                  href="mailto:uygurtepe@protonmail.com"
+                  sx={{ color: "rgba(255,255,255,0.8)", "&:hover": { color: "white" } }}
+                >
+                  <EmailIcon fontSize="inherit" />
+                </IconButton>
+              </Box>
+            </motion.div>
+          </Grid>
         </Grid>
-        <Grid item xs={4}>
-          <Typography variant="h3">Uygur Tepe</Typography>
-          <Typography variant="h5">A bit about me</Typography>
-          <Typography variant="body1" sx={{ textAlign: "left" }}>
-            I'm an engineer who loves to learn and build things. I'm currently
-            heavily interested embedded systems, software development and
-            bridging the gap between hardware and software. I have worked with a
-            variety of tools and technologies and am always looking to learn
-            more. My ultimate goal is to further improve the link between humans
-            and computer systems to aid in the development of new technologies.
-            To pursue this goal, I have worked in soft robotics, embedded systems and have aided in developing non-conventional Hardware-in-the-Loop
-            environment for thermal systems. I have recieved my B.A.S.c in
-            Electrical and Computer Engineering with a Minor in Computer Science
-            and Mathematics from the University of Windsor.
-            {/* I'm currently working as a Mechatronics Engineer at {"Daimler Truck"} for the Powertrain Hardware-in-the-Loop Team.  */}
-          </Typography>
-          <Button
-            variant="text"
-            size="large"
-            startIcon={<LocationOnIcon />}
-            href="https://maps.app.goo.gl/ejH4KheBRx56T2aC9"
-            target="_blank"
-          >
-            Detroit, MI
-          </Button>
-        </Grid>
-      </Grid>
-    </Fragment>
+      </Box>
+    </PageTransition>
   );
 };
 
