@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
 import { Fragment, useState } from "react";
 import AlertDialogSlide from "../AlertDialog/AlertDialog";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -28,6 +29,7 @@ type FormValues = {
 const ContactForm = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -42,16 +44,20 @@ const ContactForm = () => {
   };
 
   const onSubmit = (data: FormValues) => {
-    emailjs.send(serviceId!, templateId!, data, publicKey!).then(
-      (result) => {
-        console.log(result.text);
-        setDialogOpen(true);
-        setDisableSubmit(true);
-      },
-      (error) => {
-        console.log(error.text);
-      }
-    );
+    setSubmitError(null);
+    try {
+      emailjs.send(serviceId!, templateId!, data, publicKey!).then(
+        () => {
+          setDialogOpen(true);
+          setDisableSubmit(true);
+        },
+        (error) => {
+          setSubmitError(error?.text ?? "Failed to send message. Please try again.");
+        }
+      );
+    } catch (error: any) {
+      setSubmitError(error?.message ?? "Failed to send message. Please try again.");
+    }
   };
 
   return (
@@ -128,6 +134,11 @@ const ContactForm = () => {
           </Grid>
         </Grid>
       </Fragment>
+      {submitError && (
+        <Alert severity="error" sx={{ mt: 2 }}>
+          {submitError}
+        </Alert>
+      )}
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
           variant="outlined"
@@ -146,7 +157,7 @@ const ContactForm = () => {
           <DialogContentText id="alert-dialog-slide-description">
             <CheckCircleIcon color="success" fontSize="large" />
             <br />
-            I'll will get back you as soon as possible!
+            I'll get back to you as soon as possible!
           </DialogContentText>
         }
       />
