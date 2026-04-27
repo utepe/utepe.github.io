@@ -1,7 +1,13 @@
 import { Fragment, useEffect, useState } from "react";
-import Stack from "@mui/material/Stack";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Box, Chip } from "@mui/material";
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 import experienceData from "../../constants/experience.html.json";
 import ExperienceCard, {
@@ -9,64 +15,140 @@ import ExperienceCard, {
   Item,
 } from "../../components/Experience/Experience";
 import TwoItemGridCard from "../../components/TwoItemGridCard/TwoItemGridCard";
+import ScrollReveal from "../../components/ScrollReveal/ScrollReveal";
+import PageTransition from "../../components/PageTransition/PageTransition";
 
 import TepeResume from "../../assets/pdfs/TepeResume.pdf";
+
+const skillGroups = [
+  {
+    label: "Languages",
+    skills: ["Python", "C#", "Java", "TypeScript/JavaScript", "C/C++", "VHDL"],
+  },
+  {
+    label: "Engineering Tools",
+    skills: [
+      "MATLAB/Simulink",
+      "dSPACE ControlDesk",
+      "PROVEtech:TA",
+      "ecu.test",
+      "Unity",
+      "RaspberryPi",
+      "Arduino",
+      "LabVIEW",
+      "LTSpice",
+      "FPGA",
+      "ModelSim",
+    ],
+  },
+  {
+    label: "Frameworks",
+    skills: [
+      "React",
+      "Express",
+      "Mongoose",
+      "ASP.NET",
+      "SpringBoot",
+      "AWS-SDK",
+      "MaterialUI",
+    ],
+  },
+  {
+    label: "Developer Tools",
+    skills: [
+      "Git",
+      "GitHub",
+      "Postman",
+      "Docker",
+      "AWS",
+      "Jenkins",
+      "Azure",
+      "VS Code",
+      "Visual Studio",
+      "IntelliJ",
+    ],
+  },
+  {
+    label: "Libraries",
+    skills: ["SciPy", "pandas", "NumPy", "Matplotlib", "MicroPython"],
+  },
+];
 
 const Resume = () => {
   const [experiences, setExperiences] = useState<Experience[]>([]);
 
   useEffect(() => {
-    // const fetchExperiences = async () => {
-    //     const experienceData = await getJsonData<Experience[]>("../../constants/experience.json");
-    //     setExperience(experienceData);
-    // };
-    // fetchExperiences();
     setExperiences(experienceData);
   }, []);
 
   return (
-    <Fragment>
-      <TwoItemGridCard
-        leftItem={<Typography variant="h3">Experiences</Typography>}
-        rightItem={
-          <Button
-            variant="outlined"
-            color="primary"
-            endIcon={<PictureAsPdfIcon />}
-            href={TepeResume}
-            target="_blank"
-          >
-            View Full Resume
-          </Button>
-        }
-      />
-      <Stack spacing={2}>
-        {experiences.map((experience, index) => (
-          <ExperienceCard key={index} experience={experience} />
-        ))}
-      </Stack>
-      <div>
-        <Typography variant="h3">Skills</Typography>
-        <Item elevation={1}>
-          <Typography variant="subtitle1">
-            <b>Languages</b>: C#, Java, Python, Typescript/Javascript, C/C++,
-            VDHL
+    <PageTransition>
+      <Fragment>
+        <TwoItemGridCard
+          leftItem={<Typography variant="h3">Experiences</Typography>}
+          rightItem={
+            <Button
+              variant="outlined"
+              color="primary"
+              endIcon={<PictureAsPdfIcon />}
+              href={TepeResume}
+              target="_blank"
+            >
+              View Full Resume
+            </Button>
+          }
+        />
+
+        <Timeline position="alternate-reverse">
+          {experiences.map((experience, index) => (
+            <TimelineItem key={experience.id}>
+              <TimelineOppositeContent sx={{ py: 2, color: "text.secondary" }}>
+                <Typography variant="body2">
+                  {experience.startDate} – {experience.endDate}
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot color="primary" />
+                {index < experiences.length - 1 && <TimelineConnector />}
+              </TimelineSeparator>
+              <TimelineContent sx={{ pb: 3, textAlign: "left" }}>
+                <ScrollReveal delay={index * 0.1}>
+                  <ExperienceCard experience={experience} />
+                </ScrollReveal>
+              </TimelineContent>
+            </TimelineItem>
+          ))}
+        </Timeline>
+
+        <div>
+          <Typography variant="h3" sx={{ mb: 2 }}>
+            Skills
           </Typography>
-          <Typography variant="subtitle1">
-            <b>Engineering Tools</b>: MATLAB/Simulink, Unity, RaspberryPi,
-            Arduino, LabVIEW, LTSpice, FPGA, ModelSim
-          </Typography>
-          <Typography variant="subtitle1">
-            <b>Developer Tools</b>: Git, Postman, Docker, AWS, Jenkins, Azure,
-            VS Code, Visual Studio, IntelliJ
-          </Typography>
-          <Typography variant="subtitle1">
-            <b>Libraries</b>: SciPy, pandas, NumPy, Matplotlib, Machine
-            (MicroPython)
-          </Typography>
-        </Item>
-      </div>
-    </Fragment>
+          <Item elevation={1}>
+            {skillGroups.map((group) => (
+              <Box key={group.label} sx={{ mb: 2 }}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{ fontWeight: 600, mb: 1, color: "text.secondary" }}
+                >
+                  {group.label}
+                </Typography>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                  {group.skills.map((skill) => (
+                    <Chip
+                      key={skill}
+                      label={skill}
+                      variant="outlined"
+                      color="primary"
+                    />
+                  ))}
+                </Box>
+              </Box>
+            ))}
+          </Item>
+        </div>
+      </Fragment>
+    </PageTransition>
   );
 };
 

@@ -1,6 +1,20 @@
 [
     {
         "id": 1,
+        "jobTitle": "Mechatronics HIL Engineer",
+        "company": "Daimler Truck North America",
+        "location": "Detroit, MI",
+        "startDate": "11/23",
+        "endDate": "Present",
+        "description": [
+            "Designed and deployed a unified ecu.test-based testing framework adopted by 50+ global teams, reducing manual QA time by <b>40%</b> and improving traceability through GitHub Actions and test.guide integration",
+            "Commissioned and modelled a HIL platform for the next-gen electric truck powertrain; coordinated hardware/software integration and validation with system teams to ensure proper functionality and performance of the systems under test",
+            "Built a Python parser to convert legacy PROVEtech:TA and PTM test cases into ecu.test-compatible packages, enabling cross-platform XiL validation company-wide",
+            "<b>Utilized</b>: dSPACE ControlDesk, MATLAB/Simulink, PROVEtech:TA, ecu.test, Python, Git, GitHub Actions"
+        ]
+    },
+    {
+        "id": 2,
         "jobTitle": "DevOps Engineer Intern",
         "company": "Royal Bank of Canada (RBC)",
         "location": "Toronto, ON",
@@ -14,21 +28,21 @@
         ]
     },
     {
-        "id": 2,
+        "id": 3,
         "jobTitle": "Hardware-in-the-Loop (HIL) Research Intern",
         "company": "Technische Hochschule Ingolstadt",
         "location": "Ingolstadt, Germany (Remote)",
-        "startDate": "08/21",
+        "startDate": "09/21",
         "endDate": "04/23",
         "description": [
-            "Designed a HIL environment that allows MATLAB/Simulink models to properly communicate with a physical testbench via LabVIEW without a PLC, allowing easy transfer of data, reducing the setup and tools needed for a HIL environment",
-            "Published a conference paper containing setup, models and results of the HIL environment to create a replicable environment for future applications, and presented at EuroSun 2022 Conference",
+            "Created a PLC-free HIL framework that integrates MATLAB/Simulink with LabVIEW to enable near real-time thermal-system emulation, reducing equipment costs and setup complexity by 60%",
+            "Published and presented findings at EuroSun 2022, a conference on solar energy and thermal systems, enabling reproducibility for future academic and industrial research",
             "Publication: <a href='https://proceedings.ises.org/paper/eurosun2022/eurosun2022-0153-Reum.pdf' target='_blank' rel='noopener noreferrer'><em>Novel Hardware-in-the-loop Approach for thermal systems</em></a>",
             "<b>Utilized</b>: MATLAB, Simulink, LabVIEW, Carnot Toolbox, Git"
         ]
     },
     {
-        "id": 3,
+        "id": 4,
         "jobTitle": "Application Development Intern",
         "company": "Open Systems Technologies",
         "location": "Detroit, Michigan",
@@ -42,7 +56,7 @@
         ]
     },
     {
-        "id": 4,
+        "id": 5,
         "jobTitle": "API Developer Intern",
         "company": "SMSAMI",
         "location": "Toronto, Ontario (Remote)",
@@ -50,8 +64,8 @@
         "endDate": "12/20",
         "description": [
             "Architected, and created serverless microservices using AWS which are able to scale and handle hundreds of web requests at once, minimizing delay when running event-based applications",
+            "Leveraged Application Load Balancers to trigger AWS Lambda functions written in Node.js using REST API to save various data models in DynamoDB to make website function quicker by distributing web traffic",
             "Utilized design patterns and wrappers (such as Database per Server and API Gateway) to improve scalability and reduce complexity of the application",
-            "Improved status updates of tracked assets in the application by implementing a WebSocket connection to the backend to allow for real-time updates of asset battery levels",
             "<b>Utilized</b>: Typescript (Node.js), REST APIs, AWS (Lambda, DynamoDB), Dynamoose, NoSQL Workbench"
         ]
     }
