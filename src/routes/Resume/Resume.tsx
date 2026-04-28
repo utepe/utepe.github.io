@@ -10,6 +10,7 @@ import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 import experienceData from "../../constants/experience.html.json";
+import educationData from "../../constants/education.json";
 import ExperienceCard, {
   Experience,
   Item,
@@ -76,11 +77,13 @@ const skillGroups = [
 
 const Resume = () => {
   const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [educations, setEducations] = useState<Experience[]>([]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     setExperiences(experienceData);
+    setEducations(educationData);
   }, []);
 
   return (
@@ -132,6 +135,41 @@ const Resume = () => {
             </TimelineItem>
           ))}
         </Timeline>
+
+        <div>
+          <Typography variant="h3" sx={{ mb: 0 }}>Education</Typography>
+          <Timeline position={isMobile ? "right" : "alternate-reverse"}>
+            {educations.map((edu, index) => (
+              <TimelineItem key={edu.id}>
+                <TimelineOppositeContent
+                  sx={{
+                    display: { xs: "none", md: "flex" },
+                    py: 2,
+                    color: "text.secondary",
+                  }}
+                >
+                  <Typography variant="body2">
+                    {edu.startDate} – {edu.endDate}
+                  </Typography>
+                </TimelineOppositeContent>
+                <TimelineSeparator>
+                  <TimelineDot color="primary" />
+                  {index < educations.length - 1 && <TimelineConnector />}
+                </TimelineSeparator>
+                <TimelineContent sx={{ pb: 3, textAlign: "left" }}>
+                  <ScrollReveal delay={index * 0.1}>
+                    <Box sx={{ display: { xs: "block", md: "none" }, mb: 0.5 }}>
+                      <Typography variant="caption" color="text.secondary">
+                        {edu.startDate} – {edu.endDate}
+                      </Typography>
+                    </Box>
+                    <ExperienceCard experience={edu} />
+                  </ScrollReveal>
+                </TimelineContent>
+              </TimelineItem>
+            ))}
+          </Timeline>
+        </div>
 
         <div>
           <Typography variant="h3" sx={{ mb: 2 }}>

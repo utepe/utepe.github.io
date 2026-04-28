@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "jobTitle": "M.S.E, Computer Science and Engineering",
+    "company": "University of Michigan",
+    "location": "Ann Arbor, MI",
+    "startDate": "09/23",
+    "endDate": "04/25",
+    "description": []
+  },
+  {
+    "id": 2,
+    "jobTitle": "B.A.Sc, Electrical & Computer Engineering",
+    "company": "University of Windsor",
+    "location": "Windsor, ON",
+    "startDate": "09/18",
+    "endDate": "08/23",
+    "description": []
+  }
+]
