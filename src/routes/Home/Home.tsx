@@ -37,7 +37,7 @@ const Home = () => {
           columns={{ xs: 4, sm: 8, md: 12 }}
           sx={{ width: "100%", py: 6 }}
         >
-          <Grid item xs={4} sm={3} md={3} sx={{ display: "flex", justifyContent: "center" }}>
+          <Grid item xs={4} sm={3} md={4} sx={{ display: "flex", justifyContent: "center" }}>
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
@@ -47,8 +47,8 @@ const Home = () => {
                 alt="Uygur Tepe"
                 src={profilePic}
                 sx={{
-                  width: { xs: 200, md: 280, xl: 360 },
-                  height: { xs: 200, md: 280, xl: 360 },
+                  width: { xs: 200, md: 240, lg: 280, xl: 360 },
+                  height: { xs: 200, md: 240, lg: 280, xl: 360 },
                   border: "4px solid rgba(255,255,255,0.3)",
                   boxShadow: 8,
                 }}
@@ -56,7 +56,7 @@ const Home = () => {
             </motion.div>
           </Grid>
 
-          <Grid item xs={4} sm={5} md={7}>
+          <Grid item xs={4} sm={5} md={8}>
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}

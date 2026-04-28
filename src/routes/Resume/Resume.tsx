@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import { Button, Typography, Box, Chip } from "@mui/material";
+import { Button, Typography, Box, Chip, useMediaQuery, useTheme } from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -76,6 +76,8 @@ const skillGroups = [
 
 const Resume = () => {
   const [experiences, setExperiences] = useState<Experience[]>([]);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     setExperiences(experienceData);
@@ -99,10 +101,16 @@ const Resume = () => {
           }
         />
 
-        <Timeline position="alternate-reverse">
+        <Timeline position={isMobile ? "right" : "alternate-reverse"}>
           {experiences.map((experience, index) => (
             <TimelineItem key={experience.id}>
-              <TimelineOppositeContent sx={{ py: 2, color: "text.secondary" }}>
+              <TimelineOppositeContent
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  py: 2,
+                  color: "text.secondary",
+                }}
+              >
                 <Typography variant="body2">
                   {experience.startDate} – {experience.endDate}
                 </Typography>
@@ -113,6 +121,11 @@ const Resume = () => {
               </TimelineSeparator>
               <TimelineContent sx={{ pb: 3, textAlign: "left" }}>
                 <ScrollReveal delay={index * 0.1}>
+                  <Box sx={{ display: { xs: "block", md: "none" }, mb: 0.5 }}>
+                    <Typography variant="caption" color="text.secondary">
+                      {experience.startDate} – {experience.endDate}
+                    </Typography>
+                  </Box>
                   <ExperienceCard experience={experience} />
                 </ScrollReveal>
               </TimelineContent>

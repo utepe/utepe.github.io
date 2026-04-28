@@ -41,11 +41,11 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{ flexGrow: 1 }}
       >
-        <Grid item xs={7}>
+        <Grid item xs={12} sm={7}>
           <Typography variant="h5">{experience.jobTitle}</Typography>
         </Grid>
-        <Grid item xs={5}>
-          <Typography variant="h6" sx={{ textAlign: "end" }}>
+        <Grid item xs={12} sm={5}>
+          <Typography variant="h6" sx={{ textAlign: { xs: "left", sm: "end" } }}>
             {experience.company}
           </Typography>
         </Grid>
