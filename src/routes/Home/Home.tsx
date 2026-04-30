@@ -73,20 +73,33 @@ const Home = () => {
               </Typography>
               <Typography
                 variant="body1"
+                sx={{ color: "rgba(255,255,255,0.85)", textAlign: "left", mb: 2 }}
+              >
+                I'm a Mechatronics Engineer at Daimler Truck North America, where I architect
+                automated testing infrastructure for embedded systems — designing the frameworks
+                and CI/CD pipelines that validate next-generation vehicle software at scale. My
+                work sits at the intersection of embedded systems, test automation, and
+                hardware-software integration — an area I've pursued across roles in automotive,
+                research, and enterprise software.
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ color: "rgba(255,255,255,0.85)", textAlign: "left", mb: 2 }}
+              >
+                I'm driven by a strong curiosity for learning and building, with a particular
+                focus on bridging the gap between hardware and software. My experience spans
+                embedded systems, software development, soft robotics, and the development of
+                non-conventional HIL environments for thermal systems. I'm especially interested
+                in advancing the connection between humans and computer systems to enable new
+                technologies.
+              </Typography>
+              <Typography
+                variant="body1"
                 sx={{ color: "rgba(255,255,255,0.85)", textAlign: "left", mb: 3 }}
               >
-                I'm an engineer who loves to learn and build things. I'm
-                currently heavily interested in embedded systems, software
-                development and bridging the gap between hardware and software.
-                I have worked with a variety of tools and technologies and am
-                always looking to learn more. My ultimate goal is to further
-                improve the link between humans and computer systems to aid in
-                the development of new technologies. To pursue this goal, I have
-                worked in soft robotics, embedded systems and have aided in
-                developing non-conventional Hardware-in-the-Loop environments
-                for thermal systems. I have received my B.A.Sc in Electrical and
-                Computer Engineering with a Minor in Computer Science and
-                Mathematics from the University of Windsor.
+                I hold an M.S.E. in Computer Science and Engineering from the University of
+                Michigan and a B.A.Sc. in Electrical and Computer Engineering, with a minor in
+                Computer Science and Mathematics, from the University of Windsor.
               </Typography>
 
               <Fragment>
