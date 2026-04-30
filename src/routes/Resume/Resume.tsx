@@ -110,7 +110,9 @@ const Resume = () => {
               <TimelineOppositeContent
                 sx={{
                   display: { xs: "none", md: "flex" },
-                  py: 2,
+                  justifyContent: index % 2 === 0 ? "flex-start" : "flex-end",
+                  pt: "6px",
+                  pb: 2,
                   color: "text.secondary",
                 }}
               >
@@ -144,7 +146,9 @@ const Resume = () => {
                 <TimelineOppositeContent
                   sx={{
                     display: { xs: "none", md: "flex" },
-                    py: 2,
+                    justifyContent: index % 2 === 0 ? "flex-start" : "flex-end",
+                    pt: "6px",
+                    pb: 2,
                     color: "text.secondary",
                   }}
                 >
