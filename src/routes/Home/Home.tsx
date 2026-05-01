@@ -76,10 +76,10 @@ const Home = () => {
                 sx={{ color: "rgba(255,255,255,0.85)", textAlign: "left", mb: 2 }}
               >
                 I'm a Mechatronics Engineer at Daimler Truck North America, where I architect
-                automated testing infrastructure for embedded systems — designing the frameworks
+                automated testing infrastructure for embedded systems, designing the frameworks
                 and CI/CD pipelines that validate next-generation vehicle software at scale. My
                 work sits at the intersection of embedded systems, test automation, and
-                hardware-software integration — an area I've pursued across roles in automotive,
+                hardware-software integration, an area I've pursued across roles in automotive,
                 research, and enterprise software.
               </Typography>
               <Typography
